@@ -33,32 +33,32 @@ function RouteEffects() {
         "A little vision. A bigger future.",
         "Explore digital assets, thoughtfully designed investment plans, and a clearer view of your financial future.",
       ],
-      "/login": ["Sign in", "Sign in to your Valthera Investments portfolio."],
+      "/login": ["Sign in", "Sign in to your greyrockmarkets portfolio."],
       "/register": [
         "Create your account",
-        "Start your Valthera Investments journey with a clear view of your portfolio.",
+        "Start your greyrockmarkets journey with a clear view of your portfolio.",
       ],
     };
     const fallback =
       pathname.split("/").filter(Boolean).pop()?.replaceAll("-", " ") ||
-      "Valthera Investments";
+      "greyrockmarkets";
     const [label, description] = pages[pathname] || [
       fallback,
-      "Manage your Valthera Investments portfolio, digital assets, and investment plans in one place.",
+      "Manage your greyrockmarkets portfolio, digital assets, and investment plans in one place.",
     ];
-    document.title = `${label} | Valthera Investments`;
+    document.title = `${label} | greyrockmarkets`;
     document
       .querySelector('meta[name="description"]')
       ?.setAttribute("content", description);
     document
       .querySelector('meta[property="og:title"]')
-      ?.setAttribute("content", `${label} | Valthera Investments`);
+      ?.setAttribute("content", `${label} | greyrockmarkets`);
     document
       .querySelector('meta[property="og:description"]')
       ?.setAttribute("content", description);
     document
       .querySelector('meta[name="twitter:title"]')
-      ?.setAttribute("content", `${label} | Valthera Investments`);
+      ?.setAttribute("content", `${label} | greyrockmarkets`);
     document
       .querySelector('meta[name="twitter:description"]')
       ?.setAttribute("content", description);

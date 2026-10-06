@@ -134,7 +134,7 @@ export default function AppLayout({ preview = false, admin = false }) {
           <Outlet />
         </main>
         <footer className={s.footer}>
-          © {new Date().getFullYear()} Valthera Investments{" "}
+          © {new Date().getFullYear()} greyrockmarkets{" "}
           <span>Investing involves risk. Returns are not guaranteed.</span>
           <NavLink to="/terms">Terms &amp; investment policy</NavLink>
         </footer>

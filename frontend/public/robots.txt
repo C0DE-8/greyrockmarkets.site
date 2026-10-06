@@ -1,7 +1,3 @@
 User-agent: *
 Allow: /
-Disallow: /app/
-Disallow: /admin/
-Disallow: /api/
-
-Sitemap: https://valtherainvestments.com/sitemap.xml
+Sitemap: https://greyrockmarkets.com/sitemap.xml
