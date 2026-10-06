@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FiArrowUpRight, FiShield, FiCheck, FiLockKey } from "react-icons/fi";
+import { FiArrowUpRight, FiShield, FiCheck, FiLock } from "react-icons/fi";
 import { api, session } from "../api/client";
 import { Brand, Button, Field, Status } from "../components/UI";
 import s from "./Auth.module.css";
+import { LanguagePicker, useLanguage } from "../i18n";
 export default function Auth({ register = false }) {
+  const { t } = useLanguage();
   const [error, setError] = useState(""),
     [busy, setBusy] = useState(false);
   const navigate = useNavigate();
@@ -35,14 +37,14 @@ export default function Auth({ register = false }) {
       <aside>
         <Brand />
         <div>
-          <span>YOUR NEXT CHAPTER</span>
+          <span>{t("nextChapter")}</span>
           <h1>
             A little vision.
             <br />A bigger <em>future.</em>
           </h1>
           <p>
-            One space for your digital asset portfolio.
-            <br />A clearer perspective on what’s next.
+            {t("futureCopy")}
+            <br />{t("nextCopy")}
           </p>
           <div className={s.art} aria-hidden="true">
             <div className={s.artOrbit} />
@@ -54,89 +56,87 @@ export default function Auth({ register = false }) {
           </div>
         </div>
         <small>
-          <FiShield /> Built around your next move.
+          <FiShield /> {t("builtAround")}
         </small>
       </aside>
       <main>
-        <Link to="/" className={s.back}>
-          ← Back to home
-        </Link>
+        <div className={s.authTop}><Link to="/" className={s.back}>← {t("backHome")}</Link><LanguagePicker className={s.authLanguage} /></div>
         <div className={s.formWrap}>
           <div className={s.formIntro}>
           <span className={s.eyebrow}>
-            {register ? "LET’S GET YOU STARTED" : "GOOD TO SEE YOU AGAIN"}
+            {register ? t("start") : t("welcome")}
           </span>
-          <h2>{register ? "Build your account." : "Welcome back."}</h2>
+          <h2>{register ? t("registerTitle") : t("loginTitle")}</h2>
           <p>
             {register
-              ? "Create your account to explore markets and manage your portfolio."
-              : "Sign in to view your portfolio and account activity."}
+              ? t("registerCopy")
+              : t("loginCopy")}
           </p>
-          <div className={s.secureNote}><FiLockKey /> Secure access to your greyrockmarkets account</div>
+          <div className={s.secureNote}><FiLock /> {t("secure")}</div>
           </div>
           <form onSubmit={submit} className={register ? s.register : ""}>
             {register ? (
               <>
                 <Field
-                  label="Full name"
+                  label={t("fullName")}
                   name="full_name"
                   autoComplete="name"
                   required
                 />
                 <Field
-                  label="Username"
+                  label={t("username")}
                   name="username"
                   autoComplete="username"
                   required
                 />
                 <Field
-                  label="Email address"
+                  label={t("email")}
                   name="email"
                   type="email"
                   autoComplete="email"
                   required
                 />
                 <Field
-                  label="Phone number"
+                  label={t("phone")}
                   name="phone"
                   type="tel"
                   autoComplete="tel"
                   required
                 />
                 <Field
-                  label="Street address"
+                  label={t("address")}
                   name="address"
                   autoComplete="street-address"
                   required
                 />
                 <Field
-                  label="City"
+                  label={t("city")}
                   name="city"
                   autoComplete="address-level2"
                   required
                 />
                 <Field
-                  label="Country"
+                  label={t("country")}
                   name="country"
                   autoComplete="country-name"
                   required
                 />
                 <Field
-                  label="Postal code (optional)"
+                  label={t("postal")}
                   name="zipcode"
                   autoComplete="postal-code"
                 />
               </>
             ) : (
               <Field
-                label="Email or username"
+                label={t("identifier")}
                 name="identifier"
                 autoComplete="username"
                 required
               />
             )}
             <Field
-              label="Password"
+              label={t("password")}
               name="password"
               type="password"
               minLength={register ? 8 : undefined}
@@ -155,8 +155,7 @@ export default function Auth({ register = false }) {
                       required
                     />
                     <span>
-                      I understand investments involve risk and returns are not
-                      guaranteed.
+                      {t("risk")}
                     </span>
                   </label>
                   <label className={s.consent}>
@@ -167,13 +166,13 @@ export default function Auth({ register = false }) {
                       required
                     />
                     <span>
-                      I have read and agree to the{" "}
+                      {t("agree")}{" "}
                       <Link
                         to="/terms"
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        Terms &amp; Investment Policy
+                        {t("terms")}
                       </Link>
                       , including responsible-use rules.
                     </span>
@@ -182,21 +181,21 @@ export default function Auth({ register = false }) {
               )}
               <Button disabled={busy} type="submit">
                 {busy
-                  ? "Please wait…"
+                  ? t("wait")
                   : register
-                    ? "Create account"
-                    : "Sign in"}
+                    ? t("create")
+                    : t("signIn")}
                 <FiArrowUpRight />
               </Button>
-              <span className={s.formFootnote}><FiShield /> Your information is handled securely.</span>
+              <span className={s.formFootnote}><FiShield /> {t("secureFoot")}</span>
             </div>
           </form>
           <p className={s.switch}>
             {register
-              ? "Already have an account?"
-              : "New to greyrockmarkets?"}{" "}
+              ? t("already")
+              : t("newHere")}{" "}
             <Link to={register ? "/login" : "/register"}>
-              {register ? "Sign in" : "Create an account"}
+              {register ? t("signIn") : t("switchRegister")}
             </Link>
           </p>
         </div>

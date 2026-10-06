@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 
 const translations = {
   en: {
@@ -42,6 +42,7 @@ export function LanguageProvider({ children }) {
     const saved = localStorage.getItem("greyrockmarkets-language");
     return translations[saved] ? saved : "en";
   });
+  useEffect(() => { document.documentElement.lang = language; }, [language]);
   const value = useMemo(() => ({
     language,
     setLanguage: (next) => {
