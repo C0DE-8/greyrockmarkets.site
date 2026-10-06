@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import CustomSelect from "./components/CustomSelect";
 
 const translations = {
   en: {
@@ -98,8 +99,14 @@ export function LanguagePicker({ className = "" }) {
   const { language, setLanguage, t } = useLanguage();
   return (
     <label className={`languagePicker ${className}`.trim()}>
-      <span>{t("language")}</span>
-      <select aria-label={t("language")} value={language} onChange={(event) => setLanguage(event.target.value)}>
+      <span id="site-language-label">{t("language")}</span>
+      <CustomSelect
+        id="site-language"
+        variant="language"
+        aria-labelledby="site-language-label"
+        value={language}
+        onChange={(event) => setLanguage(event.target.value)}
+      >
         <option value="en">🇺🇸 English</option>
         <option value="es">🇪🇸 Español</option>
         <option value="fr">🇫🇷 Français</option>
@@ -107,7 +114,7 @@ export function LanguagePicker({ className = "" }) {
         <option value="pt">🇧🇷 Português</option>
         <option value="it">🇮🇹 Italiano</option>
         <option value="ar">🇸🇦 العربية</option>
-      </select>
+      </CustomSelect>
     </label>
   );
 }

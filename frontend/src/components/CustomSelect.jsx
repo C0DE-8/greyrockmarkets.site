@@ -36,6 +36,7 @@ export default function CustomSelect({
   id,
   assetIcons = false,
   searchable = false,
+  variant,
   searchPlaceholder = "Search options…",
   "aria-labelledby": labelledBy,
   ...selectProps
@@ -166,7 +167,7 @@ export default function CustomSelect({
   return (
     <div
       ref={rootRef}
-      className={`${s.root} ${open ? s.open : ""} ${disabled ? s.disabled : ""} ${invalid ? s.invalid : ""}`}
+      className={`${s.root} ${variant ? s[variant] || "" : ""} ${open ? s.open : ""} ${disabled ? s.disabled : ""} ${invalid ? s.invalid : ""}`}
     >
       <select
         {...selectProps}
