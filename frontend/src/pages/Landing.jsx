@@ -61,6 +61,8 @@ export default function Landing() {
             <a href="#faq" onClick={() => setMenu(false)}>
               {t("faqs")}
             </a>
+            {!loggedIn && <Link className={s.mobileNavOnly} to="/login" onClick={() => setMenu(false)}>{t("logIn")}</Link>}
+            {!loggedIn && <Link className={s.mobileGetStarted} to="/register" onClick={() => setMenu(false)}>{t("getStarted")} <FiArrowUpRight /></Link>}
           </nav>
           <div className={s.navActions}>
             <LanguagePicker />
