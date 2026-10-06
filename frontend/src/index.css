@@ -2,15 +2,15 @@
 :root {
   font-family: "DM Sans", sans-serif;
   color: #eef2ec;
-  background: #0b100e;
+  background: #09131b;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  --mint: #b3f6aa;
-  --text: #eef2ec;
-  --muted: #89958e;
-  --line: #ffffff12;
-  --panel: #121915;
+  --mint: #51d8cb;
+  --text: #edf5f6;
+  --muted: #8ba0a8;
+  --line: #c5e4ea16;
+  --panel: #101e27;
 }
 * {
   box-sizing: border-box;
@@ -57,8 +57,8 @@ h4 {
   font-family: "Manrope", sans-serif;
 }
 ::selection {
-  background: #b3f6aa;
-  color: #0b100e;
+  background: #51d8cb;
+  color: #09131b;
 }
 html {
   scroll-behavior: smooth;

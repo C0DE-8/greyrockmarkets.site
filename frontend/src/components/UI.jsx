@@ -1,5 +1,5 @@
 import { useId } from "react";
-import { FiTrendingUp, FiAlertCircle, FiArrowRight } from "react-icons/fi";
+import { FiAlertCircle, FiArrowRight } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import CustomSelect from "./CustomSelect";
 import s from "./UI.module.css";
@@ -7,10 +7,14 @@ export function Brand() {
   return (
     <Link to="/" className={s.brand} aria-label="greyrockmarkets home">
       <span className={s.mark}>
-        <FiTrendingUp />
+        <svg viewBox="0 0 40 40" aria-hidden="true">
+          <path className={s.markRing} d="M28.2 12.8A12.5 12.5 0 1 0 31.8 20H21" />
+          <path className={s.markArrow} d="m21 20 8.8-8.8M24 11.2h5.8V17" />
+        </svg>
       </span>
       <span className={s.wordmark}>
-        greyrockmarkets
+        <span className={s.wordmarkMain}>greyrock<span className={s.wordmarkAccent}>markets</span></span>
+        <span className={s.wordmarkSub}>Digital asset markets</span>
       </span>
       <span className={s.dot}>®</span>
     </Link>
