@@ -103,29 +103,6 @@ export default function Auth({ register = false }) {
                   autoComplete="tel"
                   required
                 />
-                <Field
-                  label={t("address")}
-                  name="address"
-                  autoComplete="street-address"
-                  required
-                />
-                <Field
-                  label={t("city")}
-                  name="city"
-                  autoComplete="address-level2"
-                  required
-                />
-                <Field
-                  label={t("country")}
-                  name="country"
-                  autoComplete="country-name"
-                  required
-                />
-                <Field
-                  label={t("postal")}
-                  name="zipcode"
-                  autoComplete="postal-code"
-                />
               </>
             ) : (
               <Field
