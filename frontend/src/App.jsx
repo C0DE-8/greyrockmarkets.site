@@ -30,13 +30,13 @@ function RouteEffects() {
     window.scrollTo(0, 0);
     const pages = {
       "/": [
-        "A little vision. A bigger future.",
-        "Explore digital assets, thoughtfully designed investment plans, and a clearer view of your financial future.",
+        "Crypto Markets & Portfolio Tracking",
+        "Explore cryptocurrency markets with greyrockmarkets. Follow Bitcoin, Ethereum and other digital assets, review market activity, and manage your portfolio.",
       ],
-      "/login": ["Sign in", "Sign in to your greyrockmarkets portfolio."],
+      "/login": ["Sign in", "Sign in to your greyrockmarkets account to view your portfolio and account activity."],
       "/register": [
-        "Create your account",
-        "Start your greyrockmarkets journey with a clear view of your portfolio.",
+        "Create an Account",
+        "Create a greyrockmarkets account to manage your profile and portfolio.",
       ],
     };
     const fallback =
@@ -44,8 +44,10 @@ function RouteEffects() {
       "greyrockmarkets";
     const [label, description] = pages[pathname] || [
       fallback,
-      "Manage your greyrockmarkets portfolio, digital assets, and investment plans in one place.",
+      `Manage your greyrockmarkets account, portfolio, and digital asset activity.`,
     ];
+    const siteOrigin = "https://www.greyrockmarkets.site";
+    const canonicalUrl = new URL(pathname, siteOrigin).toString();
     document.title = `${label} | greyrockmarkets`;
     document
       .querySelector('meta[name="description"]')
@@ -62,6 +64,15 @@ function RouteEffects() {
     document
       .querySelector('meta[name="twitter:description"]')
       ?.setAttribute("content", description);
+    document
+      .querySelector('link[rel="canonical"]')
+      ?.setAttribute("href", canonicalUrl);
+    document
+      .querySelector('meta[property="og:url"]')
+      ?.setAttribute("content", canonicalUrl);
+    document
+      .querySelector('meta[name="twitter:url"]')
+      ?.setAttribute("content", canonicalUrl);
   }, [pathname]);
   useEffect(() => {
     const expire = () => navigate("/login", { replace: true });

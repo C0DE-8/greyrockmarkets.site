@@ -1,7 +1,7 @@
 {
   "name": "greyrockmarkets",
   "short_name": "greyrockmarkets",
-  "description": "A clearer perspective on investing and digital assets.",
+  "description": "Explore digital asset markets, track a portfolio, and manage your account with greyrockmarkets.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#09131b",
