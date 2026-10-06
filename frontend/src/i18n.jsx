@@ -34,21 +34,54 @@ const translations = {
     registerCopy: "Erstellen Sie ein Konto, um Märkte zu erkunden und Ihr Portfolio zu verwalten.", loginCopy: "Melden Sie sich an, um Ihr Portfolio und Ihre Kontoaktivitäten anzusehen.", secure: "Sicherer Zugang zu Ihrem greyrockmarkets-Konto", secureFoot: "Ihre Daten werden sicher verarbeitet.",
     fullName: "Vollständiger Name", username: "Benutzername", email: "E-Mail-Adresse", phone: "Telefonnummer", address: "Straße und Hausnummer", city: "Stadt", country: "Land", postal: "Postleitzahl (optional)", password: "Passwort", identifier: "E-Mail oder Benutzername", risk: "Mir ist bewusst, dass Geldanlagen Risiken bergen und Erträge nicht garantiert sind.", agree: "Ich habe die", terms: "Nutzungs- und Anlagerichtlinie", create: "Konto erstellen", signIn: "Anmelden", wait: "Bitte warten…", already: "Sie haben bereits ein Konto?", newHere: "Neu bei greyrockmarkets?", switchRegister: "Konto erstellen",
   },
+  pt: {
+    language: "Idioma", home: "Início", logIn: "Entrar", getStarted: "Começar", dashboard: "Painel", why: "Por que greyrockmarkets", markets: "Explorar mercados", how: "Como funciona", mining: "Mineração", news: "Notícias", faqs: "Perguntas frequentes",
+    announcement: "Uma nova perspectiva sobre investimentos.", announcementLink: "Descubra seu próximo passo", heroPill: "SEU FUTURO. MAIS POSSIBILIDADES.", heroLead: "Uma nova visão.", heroFuture: "Um futuro", future: "maior.", heroDescription: "Acompanhe os mercados de Bitcoin e criptomoedas, explore operações e planos de investimento e acompanhe seu portfólio. Seu próximo passo começa com mais clareza.", startJourney: "Comece sua jornada", explorePlatform: "Explore a plataforma", heroNote: "Uma visão mais clara dos seus investimentos", allInOne: "Tudo em um só lugar",
+    backHome: "Voltar ao início", nextChapter: "SEU PRÓXIMO CAPÍTULO", futureCopy: "Um espaço para seu portfólio de ativos digitais.", nextCopy: "Uma perspectiva mais clara sobre o que vem a seguir.", builtAround: "Pensado para seu próximo passo.", start: "VAMOS COMEÇAR", welcome: "QUE BOM TER VOCÊ DE VOLTA", loginTitle: "Bem-vindo de volta.", registerTitle: "Crie sua conta.", registerCopy: "Crie sua conta para explorar mercados e gerenciar seu portfólio.", loginCopy: "Entre para ver seu portfólio e a atividade da conta.", secure: "Acesso seguro à sua conta greyrockmarkets", secureFoot: "Suas informações são tratadas com segurança.",
+    fullName: "Nome completo", username: "Nome de usuário", email: "E-mail", phone: "Telefone", address: "Endereço", city: "Cidade", country: "País", postal: "CEP (opcional)", password: "Senha", identifier: "E-mail ou usuário", risk: "Entendo que investimentos envolvem riscos e não garantem retornos.", agree: "Li e concordo com a", terms: "Política de Termos e Investimentos", create: "Criar conta", signIn: "Entrar", wait: "Aguarde…", already: "Já tem uma conta?", newHere: "Novo na greyrockmarkets?", switchRegister: "Criar uma conta",
+  },
+  it: {
+    language: "Lingua", home: "Home", logIn: "Accedi", getStarted: "Inizia", dashboard: "Pannello", why: "Perché greyrockmarkets", markets: "Esplora i mercati", how: "Come funziona", mining: "Mining", news: "Notizie", faqs: "Domande frequenti",
+    announcement: "Una nuova prospettiva sugli investimenti.", announcementLink: "Scopri il tuo prossimo passo", heroPill: "IL TUO FUTURO. PIÙ POSSIBILITÀ.", heroLead: "Una nuova visione.", heroFuture: "Un futuro", future: "più grande.", heroDescription: "Segui i mercati di Bitcoin e criptovalute, scopri trading e piani d’investimento e tieni d’occhio il tuo portafoglio. Il prossimo passo inizia con maggiore chiarezza.", startJourney: "Inizia il tuo percorso", explorePlatform: "Esplora la piattaforma", heroNote: "Una visione più chiara dei tuoi investimenti", allInOne: "Tutto in un unico posto",
+    backHome: "Torna alla home", nextChapter: "IL TUO PROSSIMO CAPITOLO", futureCopy: "Uno spazio per il tuo portafoglio di asset digitali.", nextCopy: "Una prospettiva più chiara su ciò che verrà.", builtAround: "Pensato per il tuo prossimo passo.", start: "INIZIAMO", welcome: "BENTORNATO", loginTitle: "Bentornato.", registerTitle: "Crea il tuo account.", registerCopy: "Crea un account per esplorare i mercati e gestire il tuo portafoglio.", loginCopy: "Accedi per visualizzare il portafoglio e le attività del tuo account.", secure: "Accesso sicuro al tuo account greyrockmarkets", secureFoot: "Le tue informazioni sono gestite in modo sicuro.",
+    fullName: "Nome completo", username: "Nome utente", email: "Indirizzo e-mail", phone: "Telefono", address: "Indirizzo", city: "Città", country: "Paese", postal: "CAP (facoltativo)", password: "Password", identifier: "E-mail o nome utente", risk: "Comprendo che gli investimenti comportano rischi e che i rendimenti non sono garantiti.", agree: "Ho letto e accetto la", terms: "Politica su termini e investimenti", create: "Crea account", signIn: "Accedi", wait: "Attendi…", already: "Hai già un account?", newHere: "Nuovo su greyrockmarkets?", switchRegister: "Crea un account",
+  },
+  ar: {
+    language: "اللغة", home: "الرئيسية", logIn: "تسجيل الدخول", getStarted: "ابدأ الآن", dashboard: "لوحة التحكم", why: "لماذا greyrockmarkets", markets: "استكشف الأسواق", how: "كيف تعمل", mining: "التعدين", news: "الأخبار", faqs: "الأسئلة الشائعة",
+    announcement: "منظور جديد للاستثمار.", announcementLink: "اكتشف خطوتك التالية", heroPill: "مستقبلك. إمكانيات أكثر.", heroLead: "رؤية أوضح.", heroFuture: "مستقبل", future: "أكبر.", heroDescription: "تابع أسواق بيتكوين والعملات الرقمية، واستكشف التداول وخطط الاستثمار، واطّلع على محفظتك بوضوح. تبدأ خطوتك التالية برؤية أوضح.", startJourney: "ابدأ رحلتك", explorePlatform: "استكشف المنصة", heroNote: "رؤية أوضح لاستثماراتك", allInOne: "كل شيء في مكان واحد",
+    backHome: "العودة للرئيسية", nextChapter: "فصلك القادم", futureCopy: "مساحة واحدة لمحفظتك من الأصول الرقمية.", nextCopy: "رؤية أوضح لما هو قادم.", builtAround: "مصممة لخطوتك القادمة.", start: "لنبدأ", welcome: "سعداء بعودتك", loginTitle: "مرحبًا بعودتك.", registerTitle: "أنشئ حسابك.", registerCopy: "أنشئ حسابًا لاستكشاف الأسواق وإدارة محفظتك.", loginCopy: "سجّل الدخول لعرض محفظتك ونشاط حسابك.", secure: "دخول آمن إلى حسابك في greyrockmarkets", secureFoot: "يتم التعامل مع معلوماتك بأمان.",
+    fullName: "الاسم الكامل", username: "اسم المستخدم", email: "البريد الإلكتروني", phone: "رقم الهاتف", address: "عنوان الشارع", city: "المدينة", country: "الدولة", postal: "الرمز البريدي (اختياري)", password: "كلمة المرور", identifier: "البريد أو اسم المستخدم", risk: "أفهم أن الاستثمار ينطوي على مخاطر وأن العوائد غير مضمونة.", agree: "قرأت وأوافق على", terms: "الشروط وسياسة الاستثمار", create: "إنشاء حساب", signIn: "تسجيل الدخول", wait: "يرجى الانتظار…", already: "لديك حساب بالفعل؟", newHere: "جديد في greyrockmarkets؟", switchRegister: "إنشاء حساب",
+  },
+};
+
+const localeLanguage = () => {
+  const locale = new Intl.Locale(navigator.languages?.[0] || navigator.language || "en");
+  const byRegion = {
+    BR: "pt", PT: "pt", IT: "it", VA: "it",
+    ES: "es", MX: "es", AR: "es", CO: "es", CL: "es", PE: "es", VE: "es", EC: "es", BO: "es", PY: "es", UY: "es", CR: "es", PA: "es", DO: "es", GT: "es", HN: "es", SV: "es", NI: "es",
+    FR: "fr", BE: "fr", MC: "fr", CH: "fr", DE: "de", AT: "de", LI: "de",
+    SA: "ar", AE: "ar", EG: "ar", JO: "ar", MA: "ar", QA: "ar", KW: "ar", BH: "ar", OM: "ar", IQ: "ar", LB: "ar", TN: "ar", DZ: "ar",
+  };
+  return byRegion[locale.region] || (translations[locale.language] ? locale.language : "en");
 };
 
 const LanguageContext = createContext(null);
 export function LanguageProvider({ children }) {
   const [language, setLanguage] = useState(() => {
     const saved = localStorage.getItem("greyrockmarkets-language");
-    return translations[saved] ? saved : "en";
+    return translations[saved] ? saved : localeLanguage();
   });
-  useEffect(() => { document.documentElement.lang = language; }, [language]);
+  useEffect(() => {
+    document.documentElement.lang = language;
+    document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
+  }, [language]);
   const value = useMemo(() => ({
     language,
     setLanguage: (next) => {
       if (!translations[next]) return;
       localStorage.setItem("greyrockmarkets-language", next);
       document.documentElement.lang = next;
+      document.documentElement.dir = next === "ar" ? "rtl" : "ltr";
       setLanguage(next);
     },
     t: (key) => translations[language][key] || translations.en[key] || key,
@@ -67,10 +100,13 @@ export function LanguagePicker({ className = "" }) {
     <label className={`languagePicker ${className}`.trim()}>
       <span>{t("language")}</span>
       <select aria-label={t("language")} value={language} onChange={(event) => setLanguage(event.target.value)}>
-        <option value="en">English</option>
-        <option value="es">Español</option>
-        <option value="fr">Français</option>
-        <option value="de">Deutsch</option>
+        <option value="en">🇺🇸 English</option>
+        <option value="es">🇪🇸 Español</option>
+        <option value="fr">🇫🇷 Français</option>
+        <option value="de">🇩🇪 Deutsch</option>
+        <option value="pt">🇧🇷 Português</option>
+        <option value="it">🇮🇹 Italiano</option>
+        <option value="ar">🇸🇦 العربية</option>
       </select>
     </label>
   );

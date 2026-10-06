@@ -46,7 +46,7 @@ export default function Landing() {
         </div>
         <header className={s.header}>
           <Brand />
-          <nav className={menu ? s.open : ""}>
+          <nav id="home-navigation" className={menu ? s.open : ""}>
             <a href="#possibilities" onClick={() => setMenu(false)}>
               {t("why")}
             </a>
@@ -79,7 +79,8 @@ export default function Landing() {
             <button
               className={s.menuButton}
               onClick={() => setMenu(!menu)}
-              aria-label="Toggle navigation"
+              aria-label={menu ? "Close navigation menu" : "Open navigation menu"}
+              aria-controls="home-navigation"
               aria-expanded={menu}
             >
               {menu ? <FiX /> : <FiMenu />}
