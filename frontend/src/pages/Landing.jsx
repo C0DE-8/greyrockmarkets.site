@@ -26,7 +26,9 @@ import SitePreloader from "../components/SitePreloader";
 import DemoActivityToast from "../components/DemoActivityToast";
 import { session } from "../api/client";
 import { CoinTicker, TradingRoutes, BitcoinNews, MiningSection, CommunitySection } from "../components/LandingExtras";
+import { LanguagePicker, useLanguage } from "../i18n";
 export default function Landing() {
+  const { t } = useLanguage();
   const loggedIn = Boolean(session.get());
   const [menu, setMenu] = useState(false);
   const [motionPaused, setMotionPaused] = useState(false);
@@ -37,39 +39,40 @@ export default function Landing() {
       <div className={s.page} inert={!ready}>
         {ready && <DemoActivityToast />}
         <div className={s.announcement}>
-          <span className={s.liveDot} /> A new perspective on investing.{" "}
+          <span className={s.liveDot} /> {t("announcement")}{" "}
           <Link to="/register">
-            Meet your next chapter <FiArrowUpRight />
+            {t("announcementLink")} <FiArrowUpRight />
           </Link>
         </div>
         <header className={s.header}>
           <Brand />
           <nav className={menu ? s.open : ""}>
             <a href="#possibilities" onClick={() => setMenu(false)}>
-              Why greyrockmarkets
+              {t("why")}
             </a>
             <a href="#markets" onClick={() => setMenu(false)}>
-              Explore markets
+              {t("markets")}
             </a>
             <a href="#how-it-works" onClick={() => setMenu(false)}>
-              How it works
+              {t("how")}
             </a>
-            <a href="#mining" onClick={() => setMenu(false)}>Mining</a>
-            <a href="#news" onClick={() => setMenu(false)}>News</a>
+            <a href="#mining" onClick={() => setMenu(false)}>{t("mining")}</a>
+            <a href="#news" onClick={() => setMenu(false)}>{t("news")}</a>
             <a href="#faq" onClick={() => setMenu(false)}>
-              FAQs
+              {t("faqs")}
             </a>
           </nav>
           <div className={s.navActions}>
+            <LanguagePicker />
             {loggedIn ? (
               <Button to="/app">
-                Dashboard <FiArrowUpRight />
+                {t("dashboard")} <FiArrowUpRight />
               </Button>
             ) : (
               <>
-                <Link to="/login">Log in</Link>
+                <Link to="/login">{t("logIn")}</Link>
                 <Button to="/register">
-                  Get started <FiArrowUpRight />
+                  {t("getStarted")} <FiArrowUpRight />
                 </Button>
               </>
             )}
@@ -88,26 +91,24 @@ export default function Landing() {
             <div className={s.heroCopy}>
               <div className={s.pill}>
                 <span />
-                YOUR FUTURE. MORE POSSIBILITIES.
+                {t("heroPill")}
               </div>
               <h1>
-                A little vision.
-                <br />A bigger <span>future.</span>
+                {t("heroLead")}
+                <br />{t("heroFuture")} <span>{t("future")}</span>
               </h1>
               <p>
-                Follow Bitcoin and crypto markets, explore trading and investment
-                plans, and see your portfolio in perspective. Your next move
-                starts with a clearer view.
+                {t("heroDescription")}
               </p>
               <div className={s.heroActions}>
                 <Button to="/register">
-                  Start your journey <FiArrowUpRight />
+                  {t("startJourney")} <FiArrowUpRight />
                 </Button>
-                <ArrowLink to="/preview">Explore the platform</ArrowLink>
+                <ArrowLink to="/preview">{t("explorePlatform")}</ArrowLink>
               </div>
               <div className={s.heroNote}>
-                <FiShield /> A clearer view of your investments <span>•</span>{" "}
-                All in one place
+                <FiShield /> {t("heroNote")} <span>•</span>{" "}
+                {t("allInOne")}
               </div>
             </div>
             <div

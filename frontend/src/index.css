@@ -66,6 +66,9 @@ html {
 p {
   line-height: 1.7;
 }
+.languagePicker { display: inline-flex; align-items: center; gap: 7px; color: var(--muted); font-size: 10px; }
+.languagePicker select { min-height: 34px; border: 1px solid var(--line); border-radius: 8px; padding: 0 27px 0 10px; color: var(--text); background: #10212b; font-size: 11px; cursor: pointer; }
+.languagePicker select:focus-visible { outline: 2px solid var(--mint); outline-offset: 2px; }
 button {
   color: inherit;
 }
