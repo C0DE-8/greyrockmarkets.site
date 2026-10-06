@@ -377,7 +377,7 @@ router.post("/register", async (req, res) => {
       return res.status(400).json({ message: "You must acknowledge investment risk and accept the Terms & Investment Policy." });
     }
 
-    if (!full_name || !username || !address || !city || !country || !phone || !cleanEmail || !password) {
+    if (!full_name || !username || !phone || !cleanEmail || !password) {
       return res.status(400).json({ message: "All required fields must be filled" });
     }
 
@@ -389,10 +389,10 @@ router.post("/register", async (req, res) => {
     const cleanUser = {
       full_name: String(full_name).trim(),
       username: String(username).trim(),
-      address: String(address).trim(),
-      city: String(city).trim(),
-      zipcode: zipcode ? String(zipcode).trim() : null,
-      country: String(country).trim(),
+      address: address ? String(address).trim() || null : null,
+      city: city ? String(city).trim() || null : null,
+      zipcode: zipcode ? String(zipcode).trim() || null : null,
+      country: country ? String(country).trim() || null : null,
       phone: String(phone).trim(),
       email: cleanEmail,
       password_hash: hash,
