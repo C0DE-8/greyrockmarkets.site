@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FiArrowUpRight, FiShield } from "react-icons/fi";
+import { FiArrowUpRight, FiShield, FiCheck, FiLockKey } from "react-icons/fi";
 import { api, session } from "../api/client";
 import { Brand, Button, Field, Status } from "../components/UI";
 import s from "./Auth.module.css";
@@ -41,11 +41,16 @@ export default function Auth({ register = false }) {
             <br />A bigger <em>future.</em>
           </h1>
           <p>
-            One space for your investments.
+            One space for your digital asset portfolio.
             <br />A clearer perspective on what’s next.
           </p>
-          <div className={s.art}>
-            <FiArrowUpRight />
+          <div className={s.art} aria-hidden="true">
+            <div className={s.artOrbit} />
+            <span><FiArrowUpRight /></span>
+          </div>
+          <div className={s.benefits}>
+            <span><FiCheck /> One clear view of your portfolio</span>
+            <span><FiCheck /> Market tools and account activity</span>
           </div>
         </div>
         <small>
@@ -57,15 +62,18 @@ export default function Auth({ register = false }) {
           ← Back to home
         </Link>
         <div className={s.formWrap}>
+          <div className={s.formIntro}>
           <span className={s.eyebrow}>
             {register ? "LET’S GET YOU STARTED" : "GOOD TO SEE YOU AGAIN"}
           </span>
-          <h2>{register ? "Make room for your future." : "Welcome back."}</h2>
+          <h2>{register ? "Build your account." : "Welcome back."}</h2>
           <p>
             {register
-              ? "Create your account to explore the possibilities."
-              : "Sign in to your investment workspace."}
+              ? "Create your account to explore markets and manage your portfolio."
+              : "Sign in to view your portfolio and account activity."}
           </p>
+          <div className={s.secureNote}><FiLockKey /> Secure access to your greyrockmarkets account</div>
+          </div>
           <form onSubmit={submit} className={register ? s.register : ""}>
             {register ? (
               <>
@@ -180,6 +188,7 @@ export default function Auth({ register = false }) {
                     : "Sign in"}
                 <FiArrowUpRight />
               </Button>
+              <span className={s.formFootnote}><FiShield /> Your information is handled securely.</span>
             </div>
           </form>
           <p className={s.switch}>
