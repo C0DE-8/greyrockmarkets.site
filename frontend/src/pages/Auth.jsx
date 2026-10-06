@@ -103,6 +103,26 @@ export default function Auth({ register = false }) {
                   autoComplete="tel"
                   required
                 />
+                <div className={s.currencyField}>
+                  <Field
+                    label={t("currency")}
+                    name="currency_symbol"
+                    as="select"
+                    defaultValue="$"
+                    searchable
+                  >
+                    <option value="$">🇺🇸 US Dollar · $</option>
+                    <option value="€">🇪🇺 Euro · €</option>
+                    <option value="£">🇬🇧 British Pound · £</option>
+                    <option value="R$">🇧🇷 Brazilian Real · R$</option>
+                    <option value="C$">🇨🇦 Canadian Dollar · C$</option>
+                    <option value="A$">🇦🇺 Australian Dollar · A$</option>
+                    <option value="¥">🇯🇵 Japanese Yen · ¥</option>
+                    <option value="₹">🇮🇳 Indian Rupee · ₹</option>
+                    <option value="Fr">🇨🇭 Swiss Franc · Fr</option>
+                  </Field>
+                  <small>{t("currencyNote")}</small>
+                </div>
               </>
             ) : (
               <Field

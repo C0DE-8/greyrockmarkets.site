@@ -369,6 +369,7 @@ router.post("/register", async (req, res) => {
       phone,
       email,
       password,
+      currency_symbol,
     } = req.body || {};
 
     const cleanEmail = String(email || "").trim().toLowerCase();
@@ -379,6 +380,12 @@ router.post("/register", async (req, res) => {
 
     if (!full_name || !username || !phone || !cleanEmail || !password) {
       return res.status(400).json({ message: "All required fields must be filled" });
+    }
+
+    const supportedCurrencySymbols = new Set(["$", "€", "£", "R$", "C$", "A$", "¥", "₹", "Fr"]);
+    const cleanCurrencySymbol = String(currency_symbol || "$").trim();
+    if (!supportedCurrencySymbols.has(cleanCurrencySymbol)) {
+      return res.status(400).json({ message: "Please choose a supported display currency." });
     }
 
     const [exists] = await pool.query("SELECT id FROM users WHERE email = ? LIMIT 1", [cleanEmail]);
@@ -396,9 +403,11 @@ router.post("/register", async (req, res) => {
       phone: String(phone).trim(),
       email: cleanEmail,
       password_hash: hash,
+      currency_symbol: cleanCurrencySymbol,
     };
 
     const result = await insertRegisteredUser(cleanUser);
+    await pool.query("UPDATE users SET currency_symbol = ? WHERE id = ?", [cleanCurrencySymbol, result.insertId]);
 
     try {
       await pool.query("DELETE FROM email_otps WHERE email = ?", [cleanEmail]);
@@ -425,6 +434,7 @@ router.post("/register", async (req, res) => {
         email: cleanEmail,
         role: "user",
         is_verified: 0,
+        currency_symbol: cleanCurrencySymbol,
       },
     });
   } catch (err) {
