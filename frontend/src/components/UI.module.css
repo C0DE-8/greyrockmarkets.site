@@ -2,39 +2,48 @@
   display: inline-flex;
   align-items: center;
   font-size: 25px;
-  font-weight: 750;
-  letter-spacing: -1px;
-  gap: 0;
+  font-weight: 800;
+  letter-spacing: -1.15px;
+  gap: 1px;
   color: var(--text);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.brand:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
 }
 .mark {
-  background: var(--mint);
-  color: #152018;
-  width: 32px;
-  height: 32px;
+  background: linear-gradient(145deg, #f0c875, #bd8d3c);
+  color: #101713;
+  width: 36px;
+  height: 36px;
   display: grid;
   place-items: center;
-  border-radius: 9px;
-  margin-right: 9px;
-  font-size: 26px;
+  border-radius: 11px;
+  margin-right: 10px;
+  font-size: 20px;
+  box-shadow: inset 0 1px 0 #ffffff70, 0 4px 14px #bd8d3c30;
 }
 .wordmark {
   display: flex;
   flex-direction: column;
   line-height: 1;
+  color: #f1f3ef;
 }
 .light {
   font-size: 8px;
-  font-weight: 500;
-  letter-spacing: 2.3px;
+  font-weight: 650;
+  letter-spacing: 3.2px;
   text-transform: uppercase;
-  margin-top: 5px;
+  margin-top: 6px;
+  color: #d5b16a;
 }
 .dot {
-  font-size: 10px;
+  font-size: 9px;
   align-self: flex-start;
-  margin-top: 7px;
-  margin-left: 3px;
+  margin-top: 4px;
+  margin-left: 4px;
+  color: #d5b16a;
 }
 .button {
   border: 1px solid var(--mint);

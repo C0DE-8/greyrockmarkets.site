@@ -1,16 +1,16 @@
 import { useId } from "react";
-import { FiArrowUpRight, FiAlertCircle, FiArrowRight } from "react-icons/fi";
+import { FiTrendingUp, FiAlertCircle, FiArrowRight } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import CustomSelect from "./CustomSelect";
 import s from "./UI.module.css";
 export function Brand() {
   return (
-    <Link to="/" className={s.brand} aria-label="Valthera Investments home">
+    <Link to="/" className={s.brand} aria-label="greyrockmarkets home">
       <span className={s.mark}>
-        <FiArrowUpRight />
+        <FiTrendingUp />
       </span>
       <span className={s.wordmark}>
-        Valthera<span className={s.light}>Investments</span>
+        greyrockmarkets
       </span>
       <span className={s.dot}>®</span>
     </Link>
