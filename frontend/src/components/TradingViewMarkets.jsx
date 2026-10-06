@@ -20,6 +20,42 @@ const markets = [
     ticker: "SOL / USDT",
     label: "The next generation of digital assets",
   },
+  {
+    name: "BNB",
+    symbol: "BINANCE:BNBUSD",
+    ticker: "BNB / USDT",
+    label: "The Binance ecosystem token",
+  },
+  {
+    name: "XRP",
+    symbol: "BITSTAMP:XRPUSD",
+    ticker: "XRP / USDT",
+    label: "Payments built for a connected world",
+  },
+  {
+    name: "Dogecoin",
+    symbol: "BINANCE:DOGEUSDT",
+    ticker: "DOGE / USDT",
+    label: "A community-powered digital currency",
+  },
+  {
+    name: "Cardano",
+    symbol: "BINANCE:ADAUSDT",
+    ticker: "ADA / USDT",
+    label: "A research-driven blockchain platform",
+  },
+  {
+    name: "Chainlink",
+    symbol: "BINANCE:LINKUSDT",
+    ticker: "LINK / USDT",
+    label: "Connecting smart contracts to real-world data",
+  },
+  {
+    name: "Litecoin",
+    symbol: "COINBASE:LTCUSD",
+    ticker: "LTC / USDT",
+    label: "A peer-to-peer digital currency",
+  },
 ];
 export default function TradingViewMarkets() {
   return (

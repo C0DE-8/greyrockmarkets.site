@@ -23,6 +23,8 @@ import CopyTrading from "./pages/CopyTrading";
 import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 import Policy from "./pages/Policy";
+import { FiMessageCircle } from "react-icons/fi";
+import s from "./components/AppLayout.module.css";
 function RouteEffects() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -149,6 +151,17 @@ export default function App() {
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <a
+        className={s.whatsapp}
+        href="https://wa.me/553198685159"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Chat with us on WhatsApp"
+        title="Chat with us on WhatsApp"
+      >
+        <FiMessageCircle aria-hidden="true" />
+        <span>WhatsApp</span>
+      </a>
     </BrowserRouter>
   );
 }

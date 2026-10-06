@@ -53,6 +53,11 @@ const translations = {
     backHome: "العودة للرئيسية", nextChapter: "فصلك القادم", futureCopy: "مساحة واحدة لمحفظتك من الأصول الرقمية.", nextCopy: "رؤية أوضح لما هو قادم.", builtAround: "مصممة لخطوتك القادمة.", start: "لنبدأ", welcome: "سعداء بعودتك", loginTitle: "مرحبًا بعودتك.", registerTitle: "أنشئ حسابك.", registerCopy: "أنشئ حسابًا لاستكشاف الأسواق وإدارة محفظتك.", loginCopy: "سجّل الدخول لعرض محفظتك ونشاط حسابك.", secure: "دخول آمن إلى حسابك في greyrockmarkets", secureFoot: "يتم التعامل مع معلوماتك بأمان.",
     fullName: "الاسم الكامل", username: "اسم المستخدم", email: "البريد الإلكتروني", phone: "رقم الهاتف", address: "عنوان الشارع", city: "المدينة", country: "الدولة", postal: "الرمز البريدي (اختياري)", password: "كلمة المرور", identifier: "البريد أو اسم المستخدم", risk: "أفهم أن الاستثمار ينطوي على مخاطر وأن العوائد غير مضمونة.", agree: "قرأت وأوافق على", terms: "الشروط وسياسة الاستثمار", create: "إنشاء حساب", signIn: "تسجيل الدخول", wait: "يرجى الانتظار…", already: "لديك حساب بالفعل؟", newHere: "جديد في greyrockmarkets؟", switchRegister: "إنشاء حساب",
   },
+  ru: { language: "Язык", home: "Главная", logIn: "Войти", getStarted: "Начать", dashboard: "Панель", why: "О greyrockmarkets", markets: "Рынки", how: "Как это работает", mining: "Майнинг", news: "Новости", faqs: "Вопросы", announcement: "Новый взгляд на инвестиции.", announcementLink: "Ваш следующий шаг", heroPill: "ВАШЕ БУДУЩЕЕ. БОЛЬШЕ ВОЗМОЖНОСТЕЙ.", heroLead: "Новый взгляд.", heroFuture: "Большое", future: "будущее.", heroDescription: "Следите за рынками криптовалют, изучайте торговые и инвестиционные планы и управляйте портфелем.", startJourney: "Начать", explorePlatform: "Обзор платформы", heroNote: "Больше ясности для ваших инвестиций", allInOne: "Всё в одном месте" },
+  zh: { language: "语言", home: "首页", logIn: "登录", getStarted: "开始使用", dashboard: "控制面板", why: "关于 greyrockmarkets", markets: "探索市场", how: "运作方式", mining: "挖矿", news: "新闻", faqs: "常见问题", announcement: "以全新视角看待投资。", announcementLink: "开启下一篇章", heroPill: "你的未来，更多可能。", heroLead: "视野更开阔。", heroFuture: "迈向更大的", future: "未来。", heroDescription: "关注比特币和加密货币市场，探索交易与投资计划，并全面了解你的投资组合。", startJourney: "开启旅程", explorePlatform: "探索平台", heroNote: "更清晰地了解投资", allInOne: "尽在一处" },
+  ja: { language: "言語", home: "ホーム", logIn: "ログイン", getStarted: "始める", dashboard: "ダッシュボード", why: "greyrockmarketsについて", markets: "市場を見る", how: "利用方法", mining: "マイニング", news: "ニュース", faqs: "よくある質問", announcement: "投資に新しい視点を。", announcementLink: "次の一歩へ", heroPill: "あなたの未来に、もっと可能性を。", heroLead: "新しい視点。", heroFuture: "さらに広がる", future: "未来。", heroDescription: "ビットコインや暗号資産市場を追い、取引や投資プランを確認し、ポートフォリオを管理できます。", startJourney: "始める", explorePlatform: "プラットフォームを見る", heroNote: "投資をより明確に把握", allInOne: "すべてを一か所に" },
+  hi: { language: "भाषा", home: "होम", logIn: "लॉग इन", getStarted: "शुरू करें", dashboard: "डैशबोर्ड", why: "greyrockmarkets क्यों", markets: "बाज़ार देखें", how: "यह कैसे काम करता है", mining: "माइनिंग", news: "समाचार", faqs: "सामान्य प्रश्न", announcement: "निवेश का एक नया नज़रिया।", announcementLink: "अपनी अगली शुरुआत देखें", heroPill: "आपका भविष्य। और भी संभावनाएँ।", heroLead: "एक नई सोच।", heroFuture: "एक बड़ा", future: "भविष्य।", heroDescription: "बिटकॉइन और क्रिप्टो बाज़ारों पर नज़र रखें, ट्रेडिंग और निवेश योजनाएँ देखें और अपना पोर्टफ़ोलियो समझें।", startJourney: "शुरू करें", explorePlatform: "प्लेटफ़ॉर्म देखें", heroNote: "अपने निवेश की बेहतर समझ", allInOne: "सब कुछ एक जगह" },
+  tr: { language: "Dil", home: "Ana sayfa", logIn: "Giriş yap", getStarted: "Başla", dashboard: "Kontrol paneli", why: "Neden greyrockmarkets", markets: "Piyasaları keşfet", how: "Nasıl çalışır", mining: "Madencilik", news: "Haberler", faqs: "SSS", announcement: "Yatırıma yeni bir bakış.", announcementLink: "Yeni bölümünüzle tanışın", heroPill: "GELECEĞİNİZ. DAHA FAZLA OLASILIK.", heroLead: "Yeni bir bakış.", heroFuture: "Daha büyük bir", future: "gelecek.", heroDescription: "Bitcoin ve kripto piyasalarını takip edin, işlem ve yatırım planlarını keşfedin, portföyünüzü değerlendirin.", startJourney: "Yolculuğa başla", explorePlatform: "Platformu keşfet", heroNote: "Yatırımlarınıza daha net bakış", allInOne: "Hepsi tek yerde" },
 };
 
 const localeLanguage = () => {
@@ -114,6 +119,11 @@ export function LanguagePicker({ className = "" }) {
         <option value="pt">🇧🇷 Português</option>
         <option value="it">🇮🇹 Italiano</option>
         <option value="ar">🇸🇦 العربية</option>
+        <option value="ru">🇷🇺 Русский</option>
+        <option value="zh">🇨🇳 中文</option>
+        <option value="ja">🇯🇵 日本語</option>
+        <option value="hi">🇮🇳 हिन्दी</option>
+        <option value="tr">🇹🇷 Türkçe</option>
       </CustomSelect>
     </label>
   );
