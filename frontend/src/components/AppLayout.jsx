@@ -52,7 +52,7 @@ export default function AppLayout({ preview = false, admin = false }) {
             <FiX />
           </button>
         </div>
-        <span className={s.label}>YOUR WORKSPACE</span>
+        <span className={s.label}>{admin ? "ADMINISTRATION" : "YOUR WORKSPACE"}</span>
         <nav>
           {(admin ? adminLinks : links).map(([to, label, Icon]) => (
             <NavLink
@@ -80,13 +80,15 @@ export default function AppLayout({ preview = false, admin = false }) {
             <Button to="/register">Create an account</Button>
           ) : (
             <button
-              className={s.logout}
+              className={`${s.logout} ${admin ? s.adminLogout : ""}`}
+              type="button"
+              aria-label={admin ? "Log out of admin" : "Log out"}
               onClick={() => {
                 (admin ? adminSession : session).clear();
                 navigate(admin ? "/admin/login" : "/login");
               }}
             >
-              <FiLogOut /> Log out
+              <FiLogOut /> {admin ? "Admin log out" : "Log out"}
             </button>
           )}
         </div>
