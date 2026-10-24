@@ -112,6 +112,7 @@ function AdminProfile() {
 }
 function WalletAddresses() {
   const wallets = useApi("/wallet-addresses", adminApi);
+  const bankDetails = useApi("/bank-deposit-details", adminApi);
   const pinSettings = useApi("/withdrawal-pin-settings", adminApi);
   const [editing, setEditing] = useState(null);
   const [qrWallet, setQrWallet] = useState(null);
@@ -120,6 +121,8 @@ function WalletAddresses() {
   const [message, setMessage] = useState("");
   const [pinError, setPinError] = useState("");
   const [pinMessage, setPinMessage] = useState("");
+  const [bankError, setBankError] = useState("");
+  const [bankMessage, setBankMessage] = useState("");
 
   async function submit(e) {
     e.preventDefault();
@@ -176,12 +179,50 @@ function WalletAddresses() {
     }
   }
 
+  async function saveBankDetails(e) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    setBusy(true);
+    setBankError("");
+    setBankMessage("");
+    try {
+      const values = Object.fromEntries(new FormData(form));
+      values.is_active = form.elements.is_active.checked ? 1 : 0;
+      const result = await adminApi.patch("/bank-deposit-details", values);
+      setBankMessage(result.message);
+      bankDetails.reload();
+    } catch (err) {
+      setBankError(err.message);
+    } finally {
+      setBusy(false);
+    }
+  }
+
   return (
     <>
       <Heading eyebrow="PAYMENT SETTINGS" title="Payment settings.">
         Manage deposit destinations and the withdrawal PIN information shown to investors.
       </Heading>
       <div className={s.walletLayout}>
+        <section className={s.panel}>
+          <h3>Bank transfer deposit details</h3>
+          <p className={s.settingsHint}>These details are shown to investors as a separate deposit method.</p>
+          <Status {...bankDetails} retry={bankDetails.reload} variant="panel" skeletonCount={1} />
+          {bankDetails.data?.details && (
+            <form className={s.walletForm} onSubmit={saveBankDetails}>
+              <Field label="Bank name" name="bank_name" defaultValue={bankDetails.data.details.bank_name} required />
+              <Field label="Branch / agency" name="branch_code" defaultValue={bankDetails.data.details.branch_code} required />
+              <Field label="Account number" name="account_number" defaultValue={bankDetails.data.details.account_number} required />
+              <Field label="Account holder" name="account_holder" defaultValue={bankDetails.data.details.account_holder} required />
+              <Field label="CPF / tax ID" name="tax_id" defaultValue={bankDetails.data.details.tax_id} required />
+              <Field label="PIX key" name="pix_key" defaultValue={bankDetails.data.details.pix_key} required />
+              <label className={s.settingsHint}><input type="checkbox" name="is_active" defaultChecked={Boolean(Number(bankDetails.data.details.is_active))} /> Show bank transfer to investors</label>
+              <Button type="submit" disabled={busy}>{busy ? "Saving…" : "Save bank details"}</Button>
+            </form>
+          )}
+          {bankError && <p className={s.formError} role="alert">{bankError}</p>}
+          {bankMessage && <p className={s.formSuccess} role="status">{bankMessage}</p>}
+        </section>
         <section className={s.panel}>
           <h3>Withdrawal PIN information</h3>
           <p className={s.settingsHint}>This fee and message appear when an investor clicks the help icon beside Withdrawal PIN.</p>
@@ -667,7 +708,7 @@ function Queue({ type }) {
                             ? new Date(r.created_at).toLocaleDateString()
                           : money(r.amount)}
                       </td>
-                      <td>{r.asset || r.method || (type === "users" ? r.account_status : "Identity documents")}</td>
+                      <td>{type === "deposits" && r.method === "bank" ? "Bank transfer / PIX" : r.asset || r.method || (type === "users" ? r.account_status : "Identity documents")}</td>
                       <td>
                         <Button secondary onClick={() => setSelected(r)}>
                           Review request

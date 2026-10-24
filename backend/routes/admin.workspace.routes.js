@@ -29,6 +29,40 @@ router.get("/overview", auth, adminOnly, async (req, res) => {
     res.status(500).json({ message: "Unable to load admin overview" });
   }
 });
+router.get("/bank-deposit-details", auth, adminOnly, async (req, res) => {
+  try {
+    const [[details]] = await db.query("SELECT * FROM bank_deposit_details WHERE id=1");
+    res.json({ details: details || null });
+  } catch (error) {
+    console.error("[admin.bank-deposit-details.get] failed:", error);
+    res.status(500).json({ message: "Unable to load bank deposit details" });
+  }
+});
+router.patch("/bank-deposit-details", auth, adminOnly, async (req, res) => {
+  const details = {
+    bank_name: String(req.body.bank_name || "").trim(),
+    branch_code: String(req.body.branch_code || "").trim(),
+    account_number: String(req.body.account_number || "").trim(),
+    account_holder: String(req.body.account_holder || "").trim(),
+    tax_id: String(req.body.tax_id || "").trim(),
+    pix_key: String(req.body.pix_key || "").trim(),
+    is_active: req.body.is_active === "0" || req.body.is_active === 0 || req.body.is_active === false ? 0 : 1,
+  };
+  if (Object.entries(details).some(([key, value]) => key !== "is_active" && (!value || value.length > 191))) {
+    return res.status(400).json({ message: "Complete each bank detail field using at most 191 characters." });
+  }
+  try {
+    await db.query(
+      `INSERT INTO bank_deposit_details (id,bank_name,branch_code,account_number,account_holder,tax_id,pix_key,is_active)
+       VALUES (1,?,?,?,?,?,?,?) ON DUPLICATE KEY UPDATE bank_name=VALUES(bank_name),branch_code=VALUES(branch_code),account_number=VALUES(account_number),account_holder=VALUES(account_holder),tax_id=VALUES(tax_id),pix_key=VALUES(pix_key),is_active=VALUES(is_active)`,
+      [details.bank_name, details.branch_code, details.account_number, details.account_holder, details.tax_id, details.pix_key, details.is_active],
+    );
+    res.json({ message: "Bank deposit details updated" });
+  } catch (error) {
+    console.error("[admin.bank-deposit-details.update] failed:", error);
+    res.status(500).json({ message: "Unable to update bank deposit details" });
+  }
+});
 router.get("/withdrawal-pin-settings", auth, adminOnly, async (req, res) => {
   try {
     res.json({ settings: await getWithdrawalPinSettings(db) });

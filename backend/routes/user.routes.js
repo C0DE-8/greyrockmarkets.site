@@ -828,6 +828,16 @@ router.get("/wallet-addresses", auth, async (req, res) => {
     return res.status(500).json({ message: "Server error", error: String(err) });
   }
 });
+router.get("/bank-deposit-details", auth, async (req, res) => {
+  try {
+    const [[details]] = await pool.query(
+      "SELECT bank_name,branch_code,account_number,account_holder,tax_id,pix_key FROM bank_deposit_details WHERE id=1 AND is_active=1",
+    );
+    return res.json({ details: details || null });
+  } catch (err) {
+    return res.status(500).json({ message: "Unable to load bank deposit details" });
+  }
+});
 // -------------------------- GET /api/users/wallet-addresses/:id --------------------------
 router.get("/wallet-addresses/:id", auth, async (req, res) => {
   try {
@@ -875,12 +885,13 @@ router.post("/deposits", auth, upload.single("proof"), async (req, res) => {
     const userId = req.user.id;
 
     const { asset, amount } = req.body || {};
-    const cleanAsset = String(asset || "").trim().toUpperCase();
+    const method = String(req.body?.method || "crypto").trim().toLowerCase();
+    const cleanAsset = method === "bank" ? "BANK" : String(asset || "").trim().toUpperCase();
     const cleanAmount = Number(amount);
 
     const allowed = new Set(["BTC", "ETH", "USDT", "BNB", "LTC", "DOGE", "XRP", "SHIB", "SOL"]);
 
-    if (!allowed.has(cleanAsset)) {
+    if (!(["crypto", "bank"].includes(method)) || (method === "crypto" && !allowed.has(cleanAsset))) {
       if (req.file) fs.unlink(req.file.path, () => {});
       return res.status(400).json({ message: "Invalid deposit method (asset)" });
     }
@@ -895,22 +906,31 @@ router.post("/deposits", auth, upload.single("proof"), async (req, res) => {
       return res.status(400).json({ message: "Proof of payment is required (upload file 'proof')" });
     }
 
+    if (method === "bank") {
+      const [[bankDetails]] = await pool.query("SELECT id FROM bank_deposit_details WHERE id=1 AND is_active=1");
+      if (!bankDetails) {
+        fs.unlink(req.file.path, () => {});
+        return res.status(400).json({ message: "Bank transfer deposits are currently unavailable" });
+      }
+    }
+
     const proof_filename = req.file.filename;
     const proof_path = `/uploads/deposits/${proof_filename}`;
     const baseUrl = `${req.protocol}://${req.get("host")}`;
 
     const [r] = await pool.query(
       `
-      INSERT INTO deposits (user_id, asset, amount, proof_filename, status, created_at, updated_at)
-      VALUES (?, ?, ?, ?, 'pending', NOW(), NOW())
+      INSERT INTO deposits (user_id, method, asset, amount, proof_filename, status, created_at, updated_at)
+      VALUES (?, ?, ?, ?, ?, 'pending', NOW(), NOW())
       `,
-      [userId, cleanAsset, String(amount), proof_filename]
+      [userId, method, cleanAsset, String(amount), proof_filename]
     );
 
     return res.json({
       message: "Deposit submitted and pending approval",
       deposit: {
         id: r.insertId,
+        method,
         asset: cleanAsset,
         amount: String(amount),
         status: "pending",
@@ -932,6 +952,7 @@ router.get("/deposits", auth, async (req, res) => {
       `
       SELECT
         id,
+        method,
         asset,
         amount,
         status,
@@ -957,6 +978,7 @@ router.get("/deposits", auth, async (req, res) => {
 
       return {
         id: d.id,
+        method: d.method || "crypto",
         asset: d.asset,
         amount: d.amount,
         status: d.status,

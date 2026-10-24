@@ -2,7 +2,7 @@ import AssetBalances from "../components/AssetBalances";
 import WalletConvert from "../components/WalletConvert";
 import { assets } from "../constants/assets";
 import { money } from "../utils/format";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FiCopy, FiArrowDownLeft, FiArrowUpRight, FiHelpCircle, FiRepeat } from "react-icons/fi";
 import { useApi } from "../hooks/useApi";
 import { Heading, Status, Empty, Field, Button } from "../components/UI";
@@ -13,16 +13,23 @@ import s from "./Wallet.module.css";
 export default function Wallet() {
   const [tab, setTab] = useState("deposit"),
     [asset, setAsset] = useState(""),
+    [depositMethod, setDepositMethod] = useState("crypto"),
     [method, setMethod] = useState("crypto"),
     [copied, setCopied] = useState(""),
     [showPinInfo, setShowPinInfo] = useState(false);
   const wallets = useApi("/wallet-addresses"),
+    bankDetails = useApi("/bank-deposit-details"),
     balance = useApi("/balances"),
     deposits = useApi("/deposits"),
     withdrawals = useApi("/withdrawals"),
     conversions = useApi("/conversions"),
     pinInfo = useApi("/withdrawal-pin-info");
   const chosen = wallets.data?.wallets.find((w) => w.asset === asset);
+  useEffect(() => {
+    if (wallets.data && bankDetails.data && wallets.data.wallets.length === 0 && bankDetails.data.details) {
+      setDepositMethod("bank");
+    }
+  }, [wallets.data, bankDetails.data]);
   const currencySymbol = balance.data?.balances.currency_symbol || "$";
   const history = tab === "deposit" ? deposits : tab === "withdraw" ? withdrawals : conversions;
   const rows = history.data?.[tab === "deposit" ? "deposits" : tab === "withdraw" ? "withdrawals" : "conversions"] || [];
@@ -134,33 +141,35 @@ export default function Wallet() {
           ) : tab === "deposit" ? (
             <>
               <Status {...wallets} retry={wallets.reload} variant="panel" skeletonCount={1} />
-              {wallets.data &&
-                (wallets.data.wallets.length ? (
+              <Status {...bankDetails} retry={bankDetails.reload} variant="panel" skeletonCount={1} />
+              {wallets.data && bankDetails.data &&
+                (wallets.data.wallets.length || bankDetails.data.details ? (
                   <ActionForm
                     endpoint="/deposits"
                     multipart
                     label="Submit deposit for review"
                     onSuccess={refresh}
                   >
-                    <Field
-                      label="Deposit asset"
-                      name="asset"
-                      as="select"
-                      assetIcons
-                      value={asset}
-                      onChange={(e) => {
-                        setAsset(e.target.value);
-                        setCopied("");
-                      }}
-                      required
-                    >
-                      <option value="">Choose an available asset</option>
-                      {wallets.data.wallets.map((w) => (
-                        <option key={w.id} value={w.asset}>
-                          {w.asset}
-                        </option>
-                      ))}
+                    <Field label="Deposit method" name="method" as="select" value={depositMethod} onChange={(e) => setDepositMethod(e.target.value)}>
+                      {wallets.data.wallets.length > 0 && <option value="crypto">Crypto</option>}
+                      {bankDetails.data.details && <option value="bank">Bank transfer / PIX</option>}
                     </Field>
+                    {depositMethod === "crypto" && <>
+                      <Field
+                        label="Deposit asset"
+                        name="asset"
+                        as="select"
+                        assetIcons
+                        value={asset}
+                        onChange={(e) => {
+                          setAsset(e.target.value);
+                          setCopied("");
+                        }}
+                        required
+                      >
+                        <option value="">Choose an available asset</option>
+                        {wallets.data.wallets.map((w) => <option key={w.id} value={w.asset}>{w.asset}</option>)}
+                      </Field>
                     {chosen && (
                       <div className={s.address}>
                         <span className={s.assetLabel}><AssetIcon asset={chosen.asset} size={24} />Platform deposit address · {chosen.asset}</span>
@@ -175,6 +184,19 @@ export default function Wallet() {
                             ? "Local testing only. Upload a sample proof image; do not send real funds."
                             : "Confirm the supported network with the platform before sending. Only send the selected asset."}
                         </p>
+                      </div>
+                    )}
+                    </>}
+                    {depositMethod === "bank" && bankDetails.data.details && (
+                      <div className={s.address}>
+                        <span className={s.assetLabel}>Bank transfer details</span>
+                        <p><strong>Bank:</strong> {bankDetails.data.details.bank_name}</p>
+                        <p><strong>Branch / agency:</strong> {bankDetails.data.details.branch_code}</p>
+                        <p><strong>Account:</strong> {bankDetails.data.details.account_number}</p>
+                        <p><strong>Account holder:</strong> {bankDetails.data.details.account_holder}</p>
+                        <p><strong>CPF:</strong> {bankDetails.data.details.tax_id}</p>
+                        <p><strong>PIX key:</strong> <code>{bankDetails.data.details.pix_key}</code></p>
+                        <p>Upload payment proof after completing the transfer. Your balance updates after approval.</p>
                       </div>
                     )}
                     <Field
@@ -200,14 +222,14 @@ export default function Wallet() {
                       }
                     />
                     <p className={s.note}>
-                      {chosen?.address.startsWith("LOCAL-TEST-")
+                      {depositMethod === "crypto" && chosen?.address.startsWith("LOCAL-TEST-")
                         ? "Submit a sample image to test the local deposit review flow. No payment is needed."
                         : "Submit after sending your payment. Your balance updates once the deposit is approved."}
                     </p>
                   </ActionForm>
                 ) : (
                   <Empty>
-                    No deposit addresses are available. Please check again
+                    No deposit methods are available. Please check again
                     later.
                   </Empty>
                 ))}
@@ -316,7 +338,7 @@ export default function Wallet() {
                     {rows.map((row) => tab === "convert" ? (
                       <tr key={row.id}><td><span className={`${s.badge} ${s.assetBadge}`}><AssetIcon asset={row.asset} size={22} />{row.direction} {row.asset}</span></td><td>{row.direction === "buy" ? money(row.source_amount, currencySymbol) : `${Number(row.source_amount).toLocaleString("en-US", { maximumFractionDigits: 8 })} ${row.asset}`}</td><td>{row.direction === "buy" ? `${Number(row.received_amount).toLocaleString("en-US", { maximumFractionDigits: 8 })} ${row.asset}` : money(row.received_amount, currencySymbol)}</td><td>{money(row.price_usd, currencySymbol)}</td><td>{new Date(row.created_at).toLocaleDateString()}</td></tr>
                     ) : (
-                      <tr key={row.id}><td>{money(row.amount, currencySymbol)}</td><td>{row.asset || row.method}</td><td><span className={s.badge}>{row.status}</span></td><td>{new Date(row.created_at).toLocaleDateString()}</td></tr>
+                      <tr key={row.id}><td>{money(row.amount, currencySymbol)}</td><td>{row.method === "bank" ? "Bank transfer / PIX" : row.asset || row.method}</td><td><span className={s.badge}>{row.status}</span></td><td>{new Date(row.created_at).toLocaleDateString()}</td></tr>
                     ))}
                   </tbody>
                 </table>

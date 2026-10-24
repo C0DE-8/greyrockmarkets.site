@@ -239,6 +239,7 @@ INSERT INTO `crypto_conversions` (`id`, `user_id`, `direction`, `asset`, `source
 CREATE TABLE `deposits` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `user_id` int(10) UNSIGNED NOT NULL,
+  `method` varchar(20) NOT NULL DEFAULT 'crypto',
   `asset` varchar(16) NOT NULL,
   `amount` decimal(24,2) NOT NULL DEFAULT 0.00,
   `status` varchar(30) NOT NULL DEFAULT 'pending',
@@ -611,6 +612,23 @@ CREATE TABLE `wallet_addresses` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Table structure and default destination for bank transfer / PIX deposits.
+CREATE TABLE `bank_deposit_details` (
+  `id` tinyint(3) UNSIGNED NOT NULL,
+  `bank_name` varchar(150) NOT NULL,
+  `branch_code` varchar(40) NOT NULL,
+  `account_number` varchar(80) NOT NULL,
+  `account_holder` varchar(150) NOT NULL,
+  `tax_id` varchar(40) NOT NULL,
+  `pix_key` varchar(191) NOT NULL,
+  `is_active` tinyint(1) NOT NULL DEFAULT 1,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+INSERT INTO `bank_deposit_details` (`id`, `bank_name`, `branch_code`, `account_number`, `account_holder`, `tax_id`, `pix_key`, `is_active`) VALUES
+(1, 'Santander', '0328', '02032435-8', 'Marilson da Silva Santos', '409.093.488-55', 'Marilsondasilva409@gmail.com', 1);
 
 --
 -- Dumping data for table `wallet_addresses`
